@@ -8,19 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @if($price)
-                    <div class="p-6 mb-4">
-                        @if($price['found'])
-                            <p>
-                                <span class="text-xl font-bold">Price</span>
-                                <span>{{ $price['price'] }}</span>
-                                <small>{{ $price['sku'] }}</small>
-                            </p>
-                        @else
-                            <p>We could not find a price for this combination</p>
-                        @endif
-                    </div>
-                @endif
                 <div class="p-6">
                     <form action="{{ route('products.view', $product->slug) }}" method="GET">
                         @foreach($attributes as $id => $name)
@@ -32,7 +19,9 @@
                                             required>
                                         @foreach($options[$id] as $option)
                                             <option value="{{ $option['id'] }}"
-                                                    @if(request()->query('attributes')) @selected($option['id'] == request()->query('attributes', '')[$id]) @endif>
+                                            @if(request()->query('attributes'))
+                                                @selected($option['id'] == request()->query('attributes', '')[$id])
+                                                    @endif>
                                                 {{ $option['value'] }}
                                             </option>
                                         @endforeach
@@ -48,6 +37,20 @@
                             </button>
                         </div>
                     </form>
+
+                    @if($price)
+                        <div class="mt-4">
+                            @if($price['found'])
+                                <p>
+                                    <span class="text-xl font-bold">Price</span>
+                                    <span>${{ number_format($price['price'], 2) }}</span><br/>
+                                    <small>{{ $price['sku'] }}</small>
+                                </p>
+                            @else
+                                <p>We could not find a price for this combination</p>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

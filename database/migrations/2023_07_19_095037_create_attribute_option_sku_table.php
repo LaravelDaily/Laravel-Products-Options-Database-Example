@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('sku_attributes', static function (Blueprint $table) {
+        Schema::create('attribute_option_sku', static function (Blueprint $table) {
             $table->foreignIdFor(Sku::class)->constrained();
             $table->foreignIdFor(AttributeOption::class)->constrained();
         });

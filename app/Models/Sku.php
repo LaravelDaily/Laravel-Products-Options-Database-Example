@@ -30,6 +30,6 @@ class Sku extends Model
 
     public function attributeOptions(): BelongsToMany
     {
-        return $this->belongsToMany(AttributeOption::class, 'sku_attributes');
+        return $this->belongsToMany(AttributeOption::class);
     }
 }
