@@ -101,7 +101,7 @@ class LocalSeeder extends Seeder
                 'options' => [
                     AttributeOption::where('attribute_id', 1)->where('value', 'Blue')->first()->id,
                     AttributeOption::where('attribute_id', 2)->where('value', '16GB')->first()->id,
-                    AttributeOption::where('attribute_id', 3)->where('value', '512GB')->first()->id,
+                    AttributeOption::where('attribute_id', 3)->where('value', '1TB')->first()->id,
                 ]
             ],
         ];
