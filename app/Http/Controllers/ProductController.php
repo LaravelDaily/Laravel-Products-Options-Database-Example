@@ -11,9 +11,6 @@ class ProductController extends Controller
 {
     public function show(Request $request, Product $product)
     {
-        $product->load([
-            'skus.attributeOptions.attribute'
-        ]);
         $attributes = Attribute::pluck('name', 'id');
 
         $options = $this->getSelectableOptionsFromProduct($product);
@@ -53,6 +50,9 @@ class ProductController extends Controller
 
     private function getSelectableOptionsFromProduct(Product $product): array
     {
+        $product->load([
+            'skus.attributeOptions.attribute'
+        ]);
         $allOptions = [];
 
         foreach ($product->skus as $sku) {
