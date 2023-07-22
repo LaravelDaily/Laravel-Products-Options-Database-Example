@@ -23,7 +23,7 @@
                                 <td class="border px-4 py-2">{{ $product->id }}</td>
                                 <td class="border px-4 py-2">{{ $product->name }}</td>
                                 <td class="border px-4 py-2">
-                                    <a href="{{ route('products.view', $product->slug) }}" class="text-blue-500">View</a>
+                                    <a href="{{ route('products.show', $product->slug) }}" class="text-blue-500">View</a>
                                 </td>
                             </tr>
                         @endforeach

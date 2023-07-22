@@ -7,24 +7,20 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class ProductViewController extends Controller
+class ProductController extends Controller
 {
-    public function __invoke(Request $request, Product $product)
+    public function show(Request $request, Product $product)
     {
         $product->load([
             'skus.attributeOptions.attribute'
         ]);
         $attributes = Attribute::pluck('name', 'id');
 
-        $allOptions = $this->getSelectableOptionsFromProduct($product);
+        $options = $this->getSelectableOptionsFromProduct($product);
         $price = $this->calculatePrice($product, $request);
 
-        return view('products.view', [
-            'product' => $product,
-            'attributes' => $attributes,
-            'options' => $allOptions,
-            'price' => $price
-        ]);
+        return view('products.show',
+            compact('product', 'attributes', 'options', 'price'));
     }
 
     private function calculatePrice(Product $product, Request $request): ?array

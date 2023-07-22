@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <form action="{{ route('products.view', $product->slug) }}" method="GET">
+                    <form action="{{ route('products.show', $product->slug) }}" method="GET">
                         @foreach($attributes as $id => $name)
                             @if(isset($options[$id]))
                                 <div class="mb-4">
@@ -19,9 +19,7 @@
                                             required>
                                         @foreach($options[$id] as $option)
                                             <option value="{{ $option['id'] }}"
-                                            @if(request()->query('attributes'))
-                                                @selected($option['id'] == request()->query('attributes', '')[$id])
-                                                    @endif>
+                                                @selected(request()->query('attributes') && $option['id'] == request()->query('attributes', '')[$id])>
                                                 {{ $option['value'] }}
                                             </option>
                                         @endforeach
