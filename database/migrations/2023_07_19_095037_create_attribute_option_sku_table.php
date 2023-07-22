@@ -10,8 +10,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('attribute_option_sku', static function (Blueprint $table) {
-            $table->foreignIdFor(Sku::class)->constrained();
-            $table->foreignIdFor(AttributeOption::class)->constrained();
+            $table->foreignId('sku_id')->constrained();
+            $table->foreignId('attribute_option_id')->constrained();
         });
     }
 };
